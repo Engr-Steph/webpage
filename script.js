@@ -97,16 +97,12 @@ if (contactForm) {
 
         fetch(scriptURL, {
             method: 'POST',
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formData),
+            mode: 'no-cors'
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                alert(`Thank you, ${name}! We've received your submission and will be in touch soon at ${email}`);
-                contactForm.reset();
-            } else {
-                alert('There was an error submitting your form. Please try again.');
-            }
+        .then(() => {
+            alert(`Thank you, ${name}! We've received your submission and will be in touch soon at ${email}`);
+            contactForm.reset();
         })
         .catch(error => {
             console.error('Error:', error);
