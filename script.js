@@ -77,12 +77,26 @@ if (contactForm) {
                 alert(text);
                 return;
             }
-            msgEl.textContent = text;
+            const textEl = msgEl.querySelector('.msg-text');
+            const closeBtn = msgEl.querySelector('.msg-close');
+            if (textEl) textEl.textContent = text;
             msgEl.className = 'form-message ' + (type === 'success' ? 'success' : 'error');
-            msgEl.style.display = 'block';
+            msgEl.style.display = 'flex';
+            // trigger visible state for animation
+            requestAnimationFrame(() => msgEl.classList.add('visible'));
+
+            // close handler
+            if (closeBtn) {
+                closeBtn.onclick = () => {
+                    msgEl.classList.remove('visible');
+                    setTimeout(() => { msgEl.style.display = 'none'; }, 300);
+                };
+            }
+
+            // auto-hide
             setTimeout(() => {
-                msgEl.className = 'form-message';
-                msgEl.style.display = 'none';
+                msgEl.classList.remove('visible');
+                setTimeout(() => { msgEl.style.display = 'none'; }, 300);
             }, 6000);
         }
 

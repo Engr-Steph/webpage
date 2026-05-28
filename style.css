@@ -489,24 +489,73 @@ body {
 /* Inline form messages for replaceable alerts */
 .form-message {
     display: none;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 12px 16px;
+    border-radius: 10px;
     margin-bottom: 12px;
     font-weight: 600;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.form-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-message .msg-icon {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    border-radius: 6px;
+    flex: 0 0 28px;
 }
 
 .form-message.success {
-    display: block;
     background: #ECFDF5;
     color: #064E3B;
     border: 1px solid #34D399;
 }
 
+.form-message.success .msg-icon {
+    background: linear-gradient(135deg,#34D399 0%,#10B981 100%);
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M9 16.2l-3.5-3.5L4 14.2 9 19 20 8l-1.4-1.4z"/></svg>') no-repeat center / contain;
+}
+
 .form-message.error {
-    display: block;
     background: #FEF3F2;
     color: #7F1D1D;
     border: 1px solid #FCA5A5;
+}
+
+.form-message.error .msg-icon {
+    background: linear-gradient(135deg,#FCA5A5 0%,#F87171 100%);
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M11 15h2v2h-2v-2zm0-8h2v6h-2V7zm1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>') no-repeat center / contain;
+}
+
+.form-message .msg-text {
+    flex: 1 1 auto;
+    padding-left: 8px;
+}
+
+.form-message .msg-close {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+}
+
+.form-message .msg-close:hover {
+    opacity: 1;
 }
 
 .contact-info {

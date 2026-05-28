@@ -318,7 +318,11 @@
                     <div class="form-group">
                         <textarea id="message" placeholder="Tell us about your goals and experience level" rows="4"></textarea>
                     </div>
-                    <div id="formMessage" class="form-message" aria-live="polite" style="display:none"></div>
+                    <div id="formMessage" class="form-message" aria-live="polite" role="status">
+                        <span class="msg-icon" aria-hidden="true"></span>
+                        <span class="msg-text"></span>
+                        <button class="msg-close" aria-label="Close message">×</button>
+                    </div>
                     <button type="submit" class="cta-button">Send Message</button>
                 </form>
 
