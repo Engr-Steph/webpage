@@ -11,8 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenu.innerHTML = `
             <ul class="mobile-nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#courses">Courses</a></li>
+                <li><a href="#learn">Learn</a></li>
+                <li><a href="#format">Format</a></li>
+                <li><a href="#curriculum">Curriculum</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         `;
@@ -79,21 +83,35 @@ if (contactForm) {
             return;
         }
 
-        // Success message
+        // Prepare data to send to Google Apps Script
         const formData = {
             name,
             email,
             company,
             course,
-            message,
-            submittedAt: new Date().toLocaleString()
+            message
         };
 
-        console.log('Form submitted:', formData);
-        alert(`Thank you, ${name}! We'll be in touch soon at ${email}`);
+        // Send to Google Apps Script
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyLgsN_jRqdZ-l8MbXNo9LxZimPfGBa_13LZGJSrdAUfFplKmYgyGIqfpFaRefY3-tjXA/exec';
 
-        // Reset form
-        contactForm.reset();
+        fetch(scriptURL, {
+            method: 'POST',
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(`Thank you, ${name}! We've received your submission and will be in touch soon at ${email}`);
+                contactForm.reset();
+            } else {
+                alert('There was an error submitting your form. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your form. Please try again.');
+        });
     });
 }
 
