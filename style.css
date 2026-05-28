@@ -55,9 +55,15 @@ body {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 160px;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .nav-links {
@@ -269,6 +275,46 @@ body {
     flex: 1;
 }
 
+.testimonial-grid,
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.testimonial-card {
+    border-top: 4px solid var(--secondary-color);
+}
+
+.testimonial-card p {
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.testimonial-card h3 {
+    margin-top: var(--spacing-md);
+    color: var(--primary-color);
+}
+
+.faq-item {
+    background: var(--bg-white);
+    padding: var(--spacing-lg);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.faq-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-color);
+}
+
+.faq-item p {
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
 .about-text h2 {
     font-size: 2.5rem;
     margin-bottom: var(--spacing-md);
@@ -341,6 +387,41 @@ body {
 .contact {
     padding: var(--spacing-2xl) var(--spacing-lg);
     background: linear-gradient(135deg, #F9FAFB 0%, #E0E7FF 100%);
+}
+
+.cta-banner {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%);
+    color: white;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+}
+
+.banner-content h2 {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.banner-content p {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+}
+
+.cta-banner .cta-button {
+    background: white;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 .contact h2 {
@@ -510,6 +591,10 @@ body {
 @media (max-width: 480px) {
     .logo {
         font-size: 1.2rem;
+    }
+
+    .logo img {
+        width: 120px;
     }
 
     .hero h1 {
