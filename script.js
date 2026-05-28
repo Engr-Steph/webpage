@@ -70,26 +70,42 @@ if (contactForm) {
         const course = document.getElementById('course').value;
         const message = document.getElementById('message').value.trim();
 
+        // Helper to show inline form messages (falls back to alert if element missing)
+        function showMessage(text, type = 'success') {
+            const msgEl = document.getElementById('formMessage');
+            if (!msgEl) {
+                alert(text);
+                return;
+            }
+            msgEl.textContent = text;
+            msgEl.className = 'form-message ' + (type === 'success' ? 'success' : 'error');
+            msgEl.style.display = 'block';
+            setTimeout(() => {
+                msgEl.className = 'form-message';
+                msgEl.style.display = 'none';
+            }, 6000);
+        }
+
         // Basic validation
         if (!name || !email || !course) {
-            alert('Please fill in all required fields');
+            showMessage('Please fill in all required fields', 'error');
             return;
         }
 
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address');
+            showMessage('Please enter a valid email address', 'error');
             return;
         }
 
         // Prepare data to send to Google Apps Script
         const formData = {
-            name,
-            email,
-            company,
-            course,
-            message
+            name: name,
+            email: email,
+            company: company,
+            course: course,
+            message: message
         };
 
         // Send to Google Apps Script
@@ -101,12 +117,12 @@ if (contactForm) {
             mode: 'no-cors'
         })
         .then(() => {
-            alert(`Thank you, ${name}! We've received your submission and will be in touch soon at ${email}`);
+            showMessage(`Thank you, ${name}! We have received your submission and will contact you at ${email}.`, 'success');
             contactForm.reset();
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('There was an error submitting your form. Please try again.');
+            showMessage('There was an error submitting your form. Please try again.', 'error');
         });
     });
 }

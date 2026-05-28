@@ -486,6 +486,29 @@ body {
     background: var(--primary-dark);
 }
 
+/* Inline form messages for replaceable alerts */
+.form-message {
+    display: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.form-message.success {
+    display: block;
+    background: #ECFDF5;
+    color: #064E3B;
+    border: 1px solid #34D399;
+}
+
+.form-message.error {
+    display: block;
+    background: #FEF3F2;
+    color: #7F1D1D;
+    border: 1px solid #FCA5A5;
+}
+
 .contact-info {
     display: grid;
     gap: var(--spacing-lg);
